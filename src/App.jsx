@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import {TodoProvider} from "./contexts/index"
 import './App.css'
 import {TodosForm, TodosItem} from './components/index'
+import { audios } from './assets/audios/audios';
 
 // import UserContextProvider from './context/UserContextProvider';
 
@@ -17,6 +18,7 @@ function App() {
   };
 
   const deleteTodo = (id) =>{
+    new Audio(audios.deleteAudio).play();
     setTodos((prev)=> prev.filter((prevTodo)=>prevTodo.id !== id))
   };
 
@@ -25,14 +27,14 @@ function App() {
   };
  
   useEffect(()=>{
-   const data = JSON.parse(localStorage.getItem("todos"));
+   const data = JSON.parse(localStorage.getItem("Todos"));
     if(data && data.length > 0){
-      setTodos(data)
+      setTodos(data);
     }
   }, []);
 
   useEffect(()=>{
-    localStorage.setItem("todos", JSON.stringify(todos))
+    localStorage.setItem("Todos", JSON.stringify(todos))
   },[todos])
  
  
